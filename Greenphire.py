@@ -3,9 +3,6 @@ import random
 
 class Greenphire(object):
 
-    # global firstName
-    # global lastName
-
     loopIterate = int(input("How many people would you like to enter?\n"))
 
     # Width of the lists, inside main list to take numbers
@@ -19,6 +16,7 @@ class Greenphire(object):
         Matrix.append([0 for x in range(width)])
 
     powerList = []
+    powerSet = set()
     tempNum = 0
 
     for loop in range(loopIterate):
@@ -28,9 +26,8 @@ class Greenphire(object):
         fullName = firstName + " " + lastName
 
         nameList.append(fullName)
-        print(nameList)
 
-        print("When picking your Powerball numbers, please make sure all of your picks are unique numbers.")
+        print("\nWhen picking your Powerball numbers, please make sure all of your picks are unique numbers.")
 
         for i in range(0, 6):
             tempNum = 0
@@ -41,7 +38,7 @@ class Greenphire(object):
                 for k in range(width):
                     while str(powerNum) in str(Matrix[j][k]):
                         powerNum = input("Looks like you already typed that. Try again!\n")
-                        print(Matrix[j])
+                        # print(Matrix[j])
 
                 # checks to see if the numbers entered are in the proper range, exits after 5 failed attempts
                 powerCount = 0
@@ -55,7 +52,7 @@ class Greenphire(object):
                     powerNum = input("Enter a ball number between 1 and 69:\n")
                     print(Matrix)
                 Matrix[j][i] = powerNum
-                print(Matrix)
+                # print(Matrix)
             # Gets the number for the Powerball from user
             elif i == 5:
                 powerNum = input("Please enter ball number the Powerball number (Between 1 and 26): \n")
@@ -75,37 +72,38 @@ class Greenphire(object):
 
     # Transposes the matrix so that all corresponding indexes are grouped together
     Matrix2 = list(map(list, zip(*Matrix)))
-    print(Matrix2)
-    print(Matrix2[0][0:2])      # Delete when finished (Test purposes)
+    # print(Matrix2)
+    # print(Matrix2[0][0:2])       Delete when finished (Test purposes)
 
     # Iterates through Matrix2, to find the highest number in each section of numbers
     for row in range(width):
         tempNum = 2
         for col in range(height):
-            location = Matrix2[row][col] #find value of location
+            location = Matrix2[row][col]    # find value of location
             numCount = Matrix2[row][0:height].count(location)
-            print("This number ", location, " has ", numCount, " occurance(s)")
-            # powerList.append(location)
-            if location != powerList[0:width-1]:
+            # print("The number ", location, " has ", numCount, " occurrence(s)")
+            # print(powerList)
+            if numCount >= tempNum:
+                tempNum = numCount
+                if location not in powerList[0:width-1]:
+                    powerList.append(location)
+            elif numCount < tempNum:
+                if location not in powerList[0:width-1]:
+                    powerList.append(random.choice(Matrix2[row][0:height]))
+            if col == height:
                 if numCount >= tempNum:
                     tempNum = numCount
-                    print("Tempnum = ", tempNum)
-                    if location != powerList[0:width-1]:
-                        powerList.append(location)
-                elif numCount < tempNum and location != powerList[0:width-1]:
-                    #if location != powerList[0:height-1]:
-                    powerList.append(random.choice(Matrix2[row][0:height]))
+                    powerList.append(location)
+                elif numCount < tempNum:
+                    powerList.append(random.choice(Matrix2[row][height]))
 
-                #print()
-            # if powerNumCount > tempNum:
-            #     tempNum = powerNumCount
-            #     matNum = location
-            #     powerList.append(matNum)
-            # elif powerNumCount == tempNum and location != powerList[0:width]: # conditions to prevent duplicates and select most common val
-            #     powerList.append(random.choice(Matrix2[row][0:height]))
-        print(powerList)
-        #print(powerNumCount)
     for p in range(height):
         print(nameList[p], Matrix[p][0:5], " Powerball: ", Matrix[p][5])
+    # Use set conversion to eliminate duplicates
+    # powerSet = sorted(set(powerList), key = powerList.index)
+    #
+    # print(powerSet)
+    # powerList = list(powerSet)
+    # print(powerList)
+    print("Winning numbers are: ", (powerList[0:width-1], "Powerball: ", powerList[width])
 
-    print("Winning numbers are: ", powerList[0:width-1], "Powerball: ", powerList[width])
