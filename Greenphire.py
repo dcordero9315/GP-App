@@ -90,12 +90,15 @@ class Greenphire(object):
             elif numCount < tempNum:
                 if location not in powerList[0:width-1]:
                     powerList.append(random.choice(Matrix2[row][0:height]))
+            else:
+                powerList.append(location)
             if col == height:
                 if numCount >= tempNum:
                     tempNum = numCount
                     powerList.append(location)
                 elif numCount < tempNum:
                     powerList.append(random.choice(Matrix2[row][height]))
+
 
     for p in range(height):
         print(nameList[p], Matrix[p][0:5], " Powerball: ", Matrix[p][5])
@@ -104,6 +107,5 @@ class Greenphire(object):
     #
     # print(powerSet)
     # powerList = list(powerSet)
-    # print(powerList)
-    print("Winning numbers are: ", (powerList[0:width-1], "Powerball: ", powerList[width])
-
+    print(powerList)
+    print("Winning numbers are: ", powerList[0:width-1], "Powerball: ", powerList[width-1])
