@@ -49,7 +49,6 @@ class Greenphire(object):
                         sys.exit()
                     print("Sorry, we aren't accepting of those numbers here.")
                     powerNum = input("Enter a ball number between 1 and 69:\n")
-                    print(Matrix)
                 Matrix[j][i] = powerNum
 
             # Gets the number for the Powerball from user
@@ -105,7 +104,6 @@ class Greenphire(object):
             powerList.append(randVal)
         else:
             powerList.append(maxFreq)
-
         tempList.clear()    # Clears tempList before the start of every row
 
     # Prints each name and Powerball Numbers
