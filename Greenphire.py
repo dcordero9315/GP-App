@@ -5,18 +5,17 @@ class Greenphire(object):
 
     loopIterate = int(input("How many people would you like to enter?\n"))
 
-    # Width of the lists, inside main list to take numbers
-    width = 6
+    width = 6               # Width of the lists, inside main list to take numbers
     height = loopIterate    # The number of times to iterate through the program is equal to the height of the matrix
     j = 0
 
-    nameList = []
-    Matrix = []
+    nameList = []           # List to store all user's names
+    Matrix = []             # Corresponding matrix to store the numbers tha they input
     for y in range(height):
         Matrix.append([0 for x in range(width)])
 
-    powerList = []
-    tempList = []
+    powerList = []          # List of the winning numbers
+    tempList = []           # Temporary List to store numbers in the event of a tie in num frequency
     tempNum = 0
     maxFreq = 0
 
